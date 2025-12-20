@@ -127,9 +127,10 @@ function showFinal() {
   let html = `
     <p><strong>Все фрагменты получены.</strong></p>
     <p>Буквы:<br>${letters.join(" ")}</p>
-  html += `<p>Составьте из них фразу и введите сюда:</p>`;
-  html += `<input id="finalInput" placeholder="Введите фразу"/><button onclick="checkFinal()">Проверить</button>`;
-<hr>
+    <p>Составьте из них фразу и введите сюда:</p>
+    <input id="finalInput" placeholder="Введите фразу"/>
+    <button onclick="checkFinal()">Проверить</button>
+    <hr>
     <button onclick="showHintActions()">Получить подсказку🔍</button>
     <div id="hintBlock"></div>
   `;
