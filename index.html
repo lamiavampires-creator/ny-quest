@@ -4,16 +4,54 @@
 <meta charset="UTF-8">
 <title>Новогодний квест</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 15px; }
-  .container { max-width: 600px; margin: auto; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-  button { display: block; margin: 10px 0; padding: 10px; width: 100%; font-size: 16px; cursor: pointer; border-radius: 5px; }
-  #finalInput { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
-  h2 { margin-top: 0; }
-  img.header { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0f8ff;
+    padding: 15px;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #finalInput {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  img.header {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
 </style>
 </head>
 <body>
-
 <div class="container">
   <img src="lisa4.png" alt="Новогодний квест" class="header">
   <h1>🎄Новогодний квест🎄</h1>
@@ -86,12 +124,13 @@ function checkAnswer(index) {
 }
 
 function showFinal() {
-  let html = "<p>Все буквы собраны! Вот они:<br> 
-	<p>"+letters.join(" ")+"</p>";
+  let html = `
+    <p><strong>Все фрагменты получены.</strong></p>
+    <p>Буквы:<br>${letters.join(" ")}</p>
   html += `<p>Составьте из них фразу и введите сюда:</p>`;
   html += `<input id="finalInput" placeholder="Введите фразу"/><button onclick="checkFinal()">Проверить</button>`;
 <hr>
-    <button onclick="showHintActions()">🔍 Получить подсказку</button>
+    <button onclick="showHintActions()">Получить подсказку🔍</button>
     <div id="hintBlock"></div>
   `;
   document.getElementById("game").innerHTML = html;
@@ -165,5 +204,4 @@ function checkFinal() {
 </script>
 
 </body>
-
 </html>
