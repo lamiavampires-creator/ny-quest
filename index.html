@@ -123,54 +123,78 @@ function checkAnswer(index) {
   nextQuestion();
 }
 
+let hintLevel = 0;
+let timerInterval = null;
+let timeLeft = 300; // 5 минут
+
 function showFinal() {
-  let html = `
+  document.getElementById("game").innerHTML = `
     <p><strong>Все фрагменты получены.</strong></p>
     <p>Буквы:<br>${letters.join(" ")}</p>
     <p>Составьте из них фразу и введите сюда:</p>
     <input id="finalInput" placeholder="Введите фразу"/>
     <button onclick="checkFinal()">Проверить</button>
     <hr>
-    <button onclick="showHintActions()">Получить подсказку🔍</button>
+    <button id="hintBtn" onclick="startHintTask()">Получить подсказку🔍</button>
     <div id="hintBlock"></div>
   `;
-  document.getElementById("game").innerHTML = html;
 }
 
-function showHintActions() {
-  if (hintLevel >= 3) {
-    document.getElementById("hintBlock").innerHTML =
-      "<p><em>Других подсказок нет. Но вы уже почти у цели.</em></p>";
-    return;
-  }
+function startHintTask() {
+  if (hintLevel >= 3) return;
+
+  const tasks = [
+    "5 минут разговаривать как робот🤖",
+    "5 минут аплодировать после каждой фразы собеседника👏",
+    "5 минут объясняться только жестами🖐️"
+  ];
+
+  timeLeft = 300;
+  document.getElementById("hintBtn").style.display = "none";
 
   document.getElementById("hintBlock").innerHTML = `
-    <p><strong>Чтобы получить подсказку, нужно выполнить действие:</strong></p>
-    <button onclick="giveHint()">5 минут разговаривать как робот🤖</button>
-    <button onclick="giveHint()">5 минут аплодировать после каждой фразы собеседника👏</button>
-    <button onclick="giveHint()">5 минут объясняться только жестами🖐️</button>
-    <p><em>(Система верит на слово😏)</em></p>
+    <p><strong>Задание для подсказки:</strong></p>
+    <p>${tasks[hintLevel]}</p>
+    <p>⏳ Осталось: <span id="timer">05:00</span></p>
   `;
+
+  timerInterval = setInterval(updateTimer, 1000);
 }
 
-function giveHint() {
+function updateTimer() {
+  timeLeft--;
+  const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+  const seconds = String(timeLeft % 60).padStart(2, "0");
+
+  document.getElementById("timer").textContent = `${minutes}:${seconds}`;
+
+  if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    document.getElementById("hintBlock").innerHTML += `
+      <button onclick="confirmTask()">Задание выполнено✅</button>
+    `;
+  }
+}
+
+function confirmTask() {
   hintLevel++;
 
   let hintText = "";
-
   if (hintLevel === 1) {
     hintText = "🧩Подсказка №1<br>Первая буква — <strong>Я</strong>";
-  } 
-  else if (hintLevel === 2) {
+  } else if (hintLevel === 2) {
     hintText = "🧩Подсказка №2<br>Фраза состоит из <strong>трёх слов</strong>";
-  } 
-  else if (hintLevel === 3) {
+  } else if (hintLevel === 3) {
     hintText = "🧩Подсказка №3<br>Эту фразу чаще говорят <strong>родители</strong>, чем игроки или алгоритмы";
   }
 
   document.getElementById("hintBlock").innerHTML = `
     <p>${hintText}</p>
-    ${hintLevel < 3 ? `<button onclick="showHintActions()">Получить ещё подсказку🔍</button>` : ""}
+    ${
+      hintLevel < 3
+        ? `<button onclick="startHintTask()">Ещё подсказка🔍</button>`
+        : `<p><em>Это была последняя подсказка😉</em></p>`
+    }
   `;
 }
 
