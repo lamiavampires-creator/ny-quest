@@ -2,13 +2,19 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 <title>Новогодний квест</title>
 <style>
   body {
-    font-family: 'Nunito', sans-serif;
-    background: #f0f8ff;
-    padding: 15px;
-  }
+  font-family: 'Merriweather', serif;
+  background: #f0f8ff;
+  padding: 15px;
+}
+
+h1, h2 {
+  font-family: 'Comfortaa', sans-serif;
+letter-spacing: 0.5px;
+}
 
   .container {
     max-width: 600px;
@@ -192,7 +198,7 @@ function confirmTask() {
     ${
       hintLevel < 3
         ? `<button onclick="startHintTask()">Ещё подсказка🔍</button>`
-        : `<p><em>Это была последняя подсказка😉</em></p>`
+        : `<p>Это была последняя подсказка😉</p>`
     }
   `;
 }
