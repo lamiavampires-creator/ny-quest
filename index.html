@@ -53,7 +53,8 @@
 </head>
 <body>
 <div class="container">
-  <img src="lisa4.png" alt="Новогодний квест" class="header">
+  <img id="lisaImage" src="lisa4.png" alt="Новогодний квест" class="header">
+
   <h1>🎄Новогодний квест🎄</h1>
   <div id="game">
     <p>Начнем?</p>
@@ -79,7 +80,9 @@ const tasks = [
 
 let current = 0;
 let letters = [];
-let hintLevel = 0; 
+let hintLevel = 0;
+let timerInterval = null;
+let timeLeft = 300;
 
 const failMessages = [
   "Хмм… это было почти правильно, если бы мы играли в альтернативную вселенную",
@@ -122,10 +125,6 @@ function checkAnswer(index) {
   current++;
   nextQuestion();
 }
-
-let hintLevel = 0;
-let timerInterval = null;
-let timeLeft = 300; // 5 минут
 
 function showFinal() {
   document.getElementById("game").innerHTML = `
