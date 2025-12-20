@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Новогодний квест</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 20px; }
-  .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+  body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 15px; }
+  .container { max-width: 600px; margin: auto; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
   button { display: block; margin: 10px 0; padding: 10px; width: 100%; font-size: 16px; cursor: pointer; border-radius: 5px; }
   #finalInput { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
   h2 { margin-top: 0; }
-  img.header { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+  img.header { width: 100%; border-radius: 10px; margin-bottom: 15px; }
 </style>
 </head>
 <body>
@@ -41,6 +41,7 @@ const tasks = [
 
 let current = 0;
 let letters = [];
+let hintLevel = 0; // сколько подсказок уже получено
 
 const failMessages = [
   "Хмм… это было почти правильно, если бы мы играли в альтернативную вселенную",
@@ -85,10 +86,54 @@ function checkAnswer(index) {
 }
 
 function showFinal() {
-  let html = "<p>Все буквы собраны! Вот они: "+letters.join(" ")+"</p>";
-  html += `<p>Составьте из них фразу и введите сюда (любой регистр и пробелы допустимы):</p>`;
+  let html = "<p>Все буквы собраны! Вот они:<br> 
+	"+letters.join(" ")+"</p>";
+  html += `<p>Составьте из них фразу и введите сюда:</p>`;
   html += `<input id="finalInput" placeholder="Введите фразу"/><button onclick="checkFinal()">Проверить</button>`;
+<hr>
+    <button onclick="showHintActions()">🔍 Получить подсказку</button>
+    <div id="hintBlock"></div>
+  `;
   document.getElementById("game").innerHTML = html;
+}
+
+function showHintActions() {
+  if (hintLevel >= 3) {
+    document.getElementById("hintBlock").innerHTML =
+      "<p><em>Других подсказок нет. Но вы уже почти у цели.</em></p>";
+    return;
+  }
+
+  let html = `
+    <p><strong>Чтобы получить подсказку, нужно выполнить действие:</strong></p>
+    <button onclick="giveHint()">5 минут разговаривать как робот🤖</button>
+    <button onclick="giveHint()">5 минут апплодировать после каждой фразы собеседника👏</button>
+    <button onclick="giveHint()">5 минут объясняться только жестами🖐️</button>
+    <p><em>(Система верит на слово😏)</em></p>
+  `;
+
+  document.getElementById("hintBlock").innerHTML = html;
+}
+
+function giveHint() {
+  hintLevel++;
+
+  let hintText = "";
+
+  if (hintLevel === 1) {
+    hintText = "🧩 Подсказка №1<br>Первая буква — <strong>Я</strong>";
+  } 
+  else if (hintLevel === 2) {
+    hintText = "🧩 Подсказка №2<br>Фраза состоит из <strong>трёх слов</strong>";
+  } 
+  else if (hintLevel === 3) {
+    hintText = "🧩 Подсказка №3<br>Эту фразу чаще говорят <strong>родители</strong>, чем игроки или алгоритмы";
+  }
+
+  document.getElementById("hintBlock").innerHTML = `
+    <p>${hintText}</p>
+    <button onclick="showHintActions()">🔍 Получить ещё подсказку</button>
+  `;
 }
 
 function checkFinal() {
