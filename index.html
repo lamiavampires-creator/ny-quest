@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Новогодний квест</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 15px; }
-  .container { max-width: 600px; margin: auto; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-  button { display: block; margin: 10px 0; padding: 10px; width: 100%; font-size: 16px; cursor: pointer; border-radius: 5px; }
-  #finalInput { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
+  body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 10px; }
+  .container { max-width: 600px; margin: auto; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px #ccc; }
+  button { display: block; margin: 8px 0; padding: 8px; width: 100%; font-size: 10px; cursor: pointer; border-radius: 5px; }
+  #finalInput { width: 100%; padding: 8px; margin: 8px 0; font-size: 10px; }
   h2 { margin-top: 0; }
-  img.header { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+  img.header { width: 100%; border-radius: 8px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -87,7 +87,7 @@ function checkAnswer(index) {
 
 function showFinal() {
   let html = "<p>Все буквы собраны! Вот они:<br> 
-	"+letters.join(" ")+"</p>";
+	<p>"+letters.join(" ")+"</p>";
   html += `<p>Составьте из них фразу и введите сюда:</p>`;
   html += `<input id="finalInput" placeholder="Введите фразу"/><button onclick="checkFinal()">Проверить</button>`;
 <hr>
@@ -155,10 +155,10 @@ function checkFinal() {
     document.getElementById("game").innerHTML = `
       <p>Вы правильно собрали фразу: Я ВАМИ ГОРЖУСЬ</p>
       <p>Вы умеете думать, пробовать и не сдаваться.<br>
-      Иногда ошибаться, но всегда идти дальше.<br>
-      Я вами горжусь!<br>
-      С Новым годом🎄</p>
-      Мамулечка🤗</p>
+      <p>Иногда ошибаться, но всегда идти дальше.<br>
+      <p>Я вами горжусь!<br>
+      <p>С Новым годом🎄</p>
+      <p>Мамулечка🤗</p>
 
     `;
   } else {
@@ -168,4 +168,5 @@ function checkFinal() {
 </script>
 
 </body>
+
 </html>
