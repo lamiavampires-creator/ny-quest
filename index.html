@@ -43,7 +43,7 @@ h1, h2 {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   h2 {
@@ -137,7 +137,7 @@ function showFinal() {
     <p><strong>Все фрагменты получены.</strong></p>
     <p>Буквы:<br>${letters.join(" ")}</p>
     <p>Составьте из них фразу и введите сюда:</p>
-    <input id="finalInput" placeholder="Введите фразу"/>
+    <input id="finalInput" placeholder="Введите фразу" style="width:100%; max-width:100%; box-sizing:border-box;"/>
     <button onclick="checkFinal()">Проверить</button>
     <hr>
     <button id="hintBtn" onclick="startHintTask()">Получить подсказку🔍</button>
